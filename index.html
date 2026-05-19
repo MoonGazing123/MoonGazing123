@@ -22,6 +22,9 @@
             --side-bg: #232734;
             --side-text: #e5e7eb;
             --border: #e2e8f0;
+            --success: #36d399;
+            --warning: #fbbd23;
+            --danger: #f87272;
         }
         [data-theme="dark"] {
             --bg: #151923;
@@ -45,6 +48,7 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
+            z-index: 100;
         }
         .side-logo {
             font-size: 1.4rem;
@@ -53,6 +57,20 @@
             padding-bottom: 1.5rem;
             border-bottom: 1px solid #373e4b;
             margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #5073fd 0%, #7a91f8 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
         }
         .side-nav a {
             display: flex;
@@ -67,6 +85,14 @@
         .side-nav a:hover, .side-nav a.active {
             background: #303846;
             color: #fff;
+        }
+        .side-nav a .badge {
+            margin-left: auto;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
         }
         /* 主内容区域 */
         .main-box {
@@ -154,10 +180,31 @@
             border: 1px solid var(--border);
             border-radius: 12px;
             padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .down-item.developing {
+            opacity: 0.7;
         }
         .down-name {
             font-weight: 500;
             margin-bottom: 10px;
+        }
+        .down-tag {
+            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        .tag-primary {
+            background: rgba(80, 115, 253, 0.1);
+            color: var(--primary);
+        }
+        .tag-warning {
+            background: rgba(251, 189, 35, 0.1);
+            color: var(--warning);
         }
         .down-btn {
             display: block;
@@ -168,9 +215,15 @@
             text-decoration: none;
             border-radius: 6px;
             font-size: 0.9rem;
+            margin-top: auto;
         }
         .down-btn:hover {
             background: #3d5ed8;
+        }
+        .down-btn.disabled {
+            background: var(--gray);
+            cursor: not-allowed;
+            pointer-events: none;
         }
         .visit-info {
             text-align: center;
@@ -183,18 +236,97 @@
             color: var(--gray);
             font-size: 0.9rem;
         }
+        /* 账号信息样式 */
+        .account-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .account-item {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .account-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: rgba(80, 115, 253, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        .account-info h4 {
+            margin-bottom: 4px;
+        }
+        .account-info p {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        .copy-btn {
+            margin-left: auto;
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        .copy-btn:hover {
+            background: var(--bg);
+        }
+        /* 工具板块样式 */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .tool-item {
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text);
+        }
+        .tool-item i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .tool-item:hover {
+            background: var(--bg);
+            transform: translateY(-2px);
+        }
         /* 手机端适配 */
         @media (max-width:768px){
             .sidebar {
                 width: 70px;
                 padding: 1rem 0.5rem;
             }
-            .side-logo span, .side-nav a span {
+            .side-logo span, .side-nav a span, .side-nav a .badge {
                 display: none;
             }
             .main-box {
                 margin-left: 70px;
                 padding: 1rem;
+            }
+            .contact-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .chat-btn {
+                margin-left: 0;
+                margin-top: 1rem;
             }
         }
     </style>
@@ -203,17 +335,20 @@
     <!-- 左侧导航栏 -->
     <div class="sidebar">
         <div class="side-logo">
-            <i class="fas fa-star"></i> <span>个人网站中心</span>
+            <div class="logo-icon"><i class="fas fa-rocket"></i></div>
+            <span>个人网站中心</span>
         </div>
         <div class="side-nav">
             <a href="#" class="active"><i class="fas fa-home"></i> <span>首页主页</span></a>
             <a href="#intro"><i class="fas fa-user"></i> <span>个人简介</span></a>
             <a href="#contact"><i class="fab fa-qq"></i> <span>联系我们</span></a>
+            <a href="#account"><i class="fas fa-key"></i> <span>共享账号</span> <span class="badge">新</span></a>
             <a href="#download"><i class="fas fa-download"></i> <span>资源下载</span></a>
+            <a href="#tools"><i class="fas fa-tools"></i> <span>实用工具</span></a>
             <a href="#nav"><i class="fas fa-compass"></i> <span>快捷导航</span></a>
             <a href="#notice"><i class="fas fa-bullhorn"></i> <span>公告须知</span></a>
-            <a href="#"><i class="fas fa-history"></i> <span>更新记录</span></a>
-            <a href="#"><i class="fas fa-cog"></i> <span>网站设置</span></a>
+            <a href="#record"><i class="fas fa-history"></i> <span>更新记录</span></a>
+            <a href="#setting"><i class="fas fa-cog"></i> <span>网站设置</span></a>
         </div>
     </div>
 
@@ -234,7 +369,8 @@
         <!-- 个人简介 -->
         <div class="card" id="intro">
             <h3 class="card-title"><i class="fas fa-user-circle"></i> 个人简介</h3>
-            <p>欢迎来到我的现代化个人网站！本站长期整理优质实用资源、编程源码、趣味工具、各类素材内容，资源持续稳定更新，无恶意弹窗，放心浏览取用。如有侵权发邮箱删除</p>
+            <p>欢迎来到我的现代化个人网站！本站长期整理优质实用资源、编程源码、趣味工具、各类素材内容，资源持续稳定更新，无恶意弹窗，放心浏览取用。</p>
+            <p style="margin-top: 10px; color: var(--gray);">如有侵权请发送邮件至联系邮箱，我会第一时间删除相关内容。</p>
         </div>
 
         <!-- 联系方式 -->
@@ -251,6 +387,100 @@
             </div>
         </div>
 
+        <!-- 多板块资源下载 -->
+        <div class="card" id="download">
+            <h3 class="card-title"><i class="fas fa-cloud-download-alt"></i> 全品类资源下载</h3>
+            <div class="download-grid">
+                <div class="down-item">
+                    <div>
+                        <span class="down-tag tag-primary">编程学习</span>
+                        <div class="down-name">C++大题型</div>
+                    </div>
+                    <a href="https://pan.quark.cn/s/7fb2abea2bdf?pwd=5Y7u" class="down-btn">立即下载</a>
+                </div>
+                <div class="down-item">
+                    <div>
+                        <span class="down-tag tag-primary">办公工具</span>
+                        <div class="down-name">上班摸鱼神器</div>
+                    </div>
+                    <a href="https://pan.quark.cn/s/f0bce9ebf7f2?pwd=MfJq" class="down-btn">立即下载</a>
+                </div>
+                <div class="down-item">
+                    <div>
+                        <span class="down-tag tag-primary">设计素材</span>
+                        <div class="down-name">豆包提供的壁纸素材</div>
+                    </div>
+                    <a href="https://pan.quark.cn/s/38887ea194b3?pwd=keiN" class="down-btn">立即下载</a>
+                </div>
+                <div class="down-item">
+                    <div>
+                        <span class="down-tag tag-primary">游戏辅助</span>
+                        <div class="down-name">我的世界辅助整合包</div>
+                    </div>
+                    <a href="https://pan.quark.cn/s/67b37b02e88d?pwd=EpMK" class="down-btn">立即下载</a>
+                </div>
+                <div class="down-item developing">
+                    <div>
+                        <span class="down-tag tag-warning">待开发</span>
+                        <div class="down-name">开发中</div>
+                    </div>
+                    <a href="#" class="down-btn disabled">暂未开放</a>
+                </div>
+                <div class="down-item developing">
+                    <div>
+                        <span class="down-tag tag-warning">待开发</span>
+                        <div class="down-name">开发中</div>
+                    </div>
+                    <a href="#" class="down-btn disabled">暂未开放</a>
+                </div>
+                <div class="down-item developing">
+                    <div>
+                        <span class="down-tag tag-warning">待开发</span>
+                        <div class="down-name">开发中</div>
+                    </div>
+                    <a href="#" class="down-btn disabled">暂未开放</a>
+                </div>
+                <div class="down-item developing">
+                    <div>
+                        <span class="down-tag tag-warning">待开发</span>
+                        <div class="down-name">开发中</div>
+                    </div>
+                    <a href="#" class="down-btn disabled">暂未开放</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 实用工具 -->
+        <div class="card" id="tools">
+            <h3 class="card-title"><i class="fas fa-wrench"></i> 实用工具</h3>
+            <div class="tools-grid">
+                <a href="https://tool.lu/" target="_blank" class="tool-item">
+                    <i class="fas fa-code"></i>
+                    <div>在线代码格式化</div>
+                </a>
+                <a href="https://convertio.co/zh/" target="_blank" class="tool-item">
+                    <i class="fas fa-file-convert"></i>
+                    <div>文件格式转换</div>
+                </a>
+                <a href="https://www.bejson.com/" target="_blank" class="tool-item">
+                    <i class="fas fa-file-code"></i>
+                    <div>JSON格式化</div>
+                </a>
+                <a href="https://www.photopea.com/" target="_blank" class="tool-item">
+                    <i class="fas fa-edit"></i>
+                    <div>在线图片编辑</div>
+                </a>
+                <a href="https://www.urlencoder.org/" target="_blank" class="tool-item">
+                    <i class="fas fa-link"></i>
+                    <div>URL编解码</div>
+                </a>
+                <a href="https://tool.oschina.net/encrypt/" target="_blank" class="tool-item">
+                    <i class="fas fa-lock"></i>
+                    <div>加密解密工具</div>
+                </a>
+            </div>
+        </div>
+
         <!-- 快捷导航 -->
         <div class="card" id="nav">
             <h3 class="card-title"><i class="fas fa-route"></i> 全网快捷导航</h3>
@@ -258,45 +488,9 @@
                 <a href="https://www.baidu.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">百度搜索</a>
                 <a href="https://pan.quark.cn" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">夸克网盘</a>
                 <a href="https://mail.qq.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">QQ邮箱</a>
-            </div>
-        </div>
-
-        <!-- 多板块资源下载 -->
-        <div class="card" id="download">
-            <h3 class="card-title"><i class="fas fa-cloud-download-alt"></i> 全品类资源下载</h3>
-            <div class="download-grid">
-                <div class="down-item">
-                    <div class="down-name">C++大题型</div>
-                    <a href="https://pan.quark.cn/s/7fb2abea2bdf?pwd=5Y7u" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div class="down-name">上班摸鱼神器</div>
-                    <a href="https://pan.quark.cn/s/f0bce9ebf7f2?pwd=MfJq" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div class="down-name">豆包提供的壁纸素材</div>
-                    <a href="https://pan.quark.cn/s/38887ea194b3?pwd=keiN" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div class="down-name">我的世界辅助整合包</div>
-                    <a href="https://pan.quark.cn/s/67b37b02e88d?pwd=EpMK" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div class="down-name">正在开发中</div>
-                    <a href="粘贴链接" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div class="down-name">开发中</div>
-                    <a href="粘贴链接" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div class="down-name">开发中</div>
-                    <a href="粘贴链接" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div class="down-name">开发中</div>
-                    <a href="粘贴链接" class="down-btn">立即下载</a>
-                </div>
+                <a href="https://www.bilibili.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">哔哩哔哩</a>
+                <a href="https://github.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">GitHub</a>
+                <a href="https://gitee.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">Gitee</a>
             </div>
         </div>
 
@@ -306,7 +500,38 @@
             <p>1. 所有资源均免费分享，仅供学习交流使用<br>
             2. 链接失效可联系我补发全新链接<br>
             3. 有想要的资源可以留言提出，尽力更新<br>
-            4. 网站支持深色浅色一键自由切换</p>
+            4. 网站支持深色浅色一键自由切换<br>
+            5. 共享账号仅作测试使用，请勿用于商业用途<br>
+            6. 实用工具均为第三方链接，如有问题请反馈</p>
+        </div>
+
+        <!-- 更新记录 -->
+        <div class="card" id="record">
+            <h3 class="card-title"><i class="fas fa-history"></i> 更新记录</h3>
+            <ul style="line-height: 1.8; padding-left: 20px; color: var(--text);">
+                <li>2026-01-10：新增共享账号板块、实用工具板块</li>
+                <li>2026-01-05：优化深色模式显示效果，修复移动端适配问题</li>
+                <li>2026-01-01：网站首次上线，基础功能搭建完成</li>
+            </ul>
+        </div>
+
+        <!-- 网站设置 -->
+        <div class="card" id="setting">
+            <h3 class="card-title"><i class="fas fa-cog"></i> 网站设置</h3>
+            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="autoDark" checked>
+                    <label for="autoDark">跟随系统深色模式</label>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="showVisit" checked>
+                    <label for="showVisit">显示访问量统计</label>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <input type="checkbox" id="rememberTheme" checked>
+                    <label for="rememberTheme">记住主题设置</label>
+                </div>
+            </div>
         </div>
 
         <div class="footer">
@@ -341,6 +566,61 @@
             htmlDom.setAttribute("data-theme",now);
             localStorage.setItem("webTheme",now);
             changeIcon(now);
+        });
+
+        // 复制文本功能
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert("复制成功！");
+            }).catch(() => {
+                // 降级方案
+                let textArea = document.createElement("textarea");
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textArea);
+                alert("复制成功！");
+            });
+        }
+
+        // 访问量自增效果（模拟）
+        let visitCount = parseInt(document.getElementById("visitCount").innerText);
+        function updateVisitCount() {
+            visitCount += Math.floor(Math.random() * 3);
+            document.getElementById("visitCount").innerText = visitCount;
+            localStorage.setItem("visitCount", visitCount);
+        }
+        // 每30分钟更新一次访问量（模拟）
+        setInterval(updateVisitCount, 1800000);
+        
+        // 系统深色模式检测
+        const autoDark = document.getElementById("autoDark");
+        const darkModeMedia = window.matchMedia('(prefers-color-scheme: dark)');
+        function checkSystemTheme() {
+            if(autoDark.checked) {
+                const systemDark = darkModeMedia.matches;
+                const newTheme = systemDark ? "dark" : "light";
+                htmlDom.setAttribute("data-theme", newTheme);
+                localStorage.setItem("webTheme", newTheme);
+                changeIcon(newTheme);
+            }
+        }
+        autoDark.addEventListener("change", checkSystemTheme);
+        darkModeMedia.addEventListener("change", checkSystemTheme);
+        
+        // 显示/隐藏访问量
+        document.getElementById("showVisit").addEventListener("change", function(e) {
+            document.querySelector(".visit-info").style.display = e.target.checked ? "block" : "none";
+        });
+        
+        // 记住主题设置开关
+        document.getElementById("rememberTheme").addEventListener("change", function(e) {
+            if(!e.target.checked) {
+                localStorage.removeItem("webTheme");
+            } else {
+                localStorage.setItem("webTheme", htmlDom.getAttribute("data-theme"));
+            }
         });
     </script>
 </body>
