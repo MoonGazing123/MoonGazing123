@@ -1,627 +1,106 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的专属个人网站</title>
-    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-            transition: all 0.3s ease;
-        }
-        :root {
-            --bg: #f4f7fc;
-            --card: #ffffff;
-            --text: #222;
-            --gray: #666;
-            --primary: #5073fd;
-            --side-bg: #232734;
-            --side-text: #e5e7eb;
-            --border: #e2e8f0;
-            --success: #36d399;
-            --warning: #fbbd23;
-            --danger: #f87272;
-        }
-        [data-theme="dark"] {
-            --bg: #151923;
-            --card: #1e2430;
-            --text: #f0f0f0;
-            --gray: #a0aec0;
-            --border: #2d3748;
-        }
-        body {
-            background: var(--bg);
-            color: var(--text);
-            display: flex;
-            min-height: 100vh;
-        }
-        /* 左侧侧边导航 */
-        .sidebar {
-            width: 240px;
-            background: var(--side-bg);
-            color: var(--side-text);
-            padding: 2rem 1rem;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 100;
-        }
-        .side-logo {
-            font-size: 1.4rem;
-            font-weight: bold;
-            text-align: center;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid #373e4b;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #5073fd 0%, #7a91f8 100%);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        .side-nav a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: #b0b8c4;
-            text-decoration: none;
-            padding: 12px 14px;
-            border-radius: 8px;
-            margin: 6px 0;
-        }
-        .side-nav a:hover, .side-nav a.active {
-            background: #303846;
-            color: #fff;
-        }
-        .side-nav a .badge {
-            margin-left: auto;
-            font-size: 0.7rem;
-            padding: 2px 6px;
-            border-radius: 10px;
-            background: var(--primary);
-            color: white;
-        }
-        /* 主内容区域 */
-        .main-box {
-            flex: 1;
-            margin-left: 240px;
-            padding: 2rem;
-        }
-        .top-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-        .time-text {
-            font-size: 1rem;
-            color: var(--gray);
-        }
-        .theme-btn {
-            background: var(--card);
-            border: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            cursor: pointer;
-            color: var(--text);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .card {
-            background: var(--card);
-            border-radius: 14px;
-            padding: 1.8rem;
-            margin-bottom: 1.6rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            border: 1px solid var(--border);
-        }
-        .card-title {
-            font-size: 1.25rem;
-            margin-bottom: 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--primary);
-        }
-        /* 联系方式样式 */
-        .contact-row {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-        .qq-icon {
-            width: 56px;
-            height: 56px;
-            background: #12b7f5;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 1.6rem;
-        }
-        .email-txt {
-            color: #12b7f5;
-            font-weight: 500;
-            margin-top: 5px;
-        }
-        .chat-btn {
-            margin-left: auto;
-            background: #12b7f5;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-        }
-        .chat-btn:hover {
-            background: #0e9cd1;
-        }
-        /* 下载网格布局 */
-        .download-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 1.2rem;
-        }
-        .down-item {
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .down-item.developing {
-            opacity: 0.7;
-        }
-        .down-name {
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-        .down-tag {
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-bottom: 10px;
-            display: inline-block;
-        }
-        .tag-primary {
-            background: rgba(80, 115, 253, 0.1);
-            color: var(--primary);
-        }
-        .tag-warning {
-            background: rgba(251, 189, 35, 0.1);
-            color: var(--warning);
-        }
-        .down-btn {
-            display: block;
-            text-align: center;
-            padding: 8px;
-            background: var(--primary);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            margin-top: auto;
-        }
-        .down-btn:hover {
-            background: #3d5ed8;
-        }
-        .down-btn.disabled {
-            background: var(--gray);
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-        .visit-info {
-            text-align: center;
-            font-size: 1.1rem;
-            padding: 1rem 0;
-        }
-        .footer {
-            text-align: center;
-            margin-top: 3rem;
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-        /* 账号信息样式 */
-        .account-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .account-item {
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .account-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            background: rgba(80, 115, 253, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.2rem;
-        }
-        .account-info h4 {
-            margin-bottom: 4px;
-        }
-        .account-info p {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        .copy-btn {
-            margin-left: auto;
-            background: transparent;
-            border: 1px solid var(--border);
-            padding: 6px 10px;
-            border-radius: 6px;
-            color: var(--text);
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-        .copy-btn:hover {
-            background: var(--bg);
-        }
-        /* 工具板块样式 */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        .tool-item {
-            padding: 1rem;
-            border-radius: 10px;
-            border: 1px solid var(--border);
-            text-align: center;
-            text-decoration: none;
-            color: var(--text);
-        }
-        .tool-item i {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-            display: block;
-        }
-        .tool-item:hover {
-            background: var(--bg);
-            transform: translateY(-2px);
-        }
-        /* 手机端适配 */
-        @media (max-width:768px){
-            .sidebar {
-                width: 70px;
-                padding: 1rem 0.5rem;
-            }
-            .side-logo span, .side-nav a span, .side-nav a .badge {
-                display: none;
-            }
-            .main-box {
-                margin-left: 70px;
-                padding: 1rem;
-            }
-            .contact-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .chat-btn {
-                margin-left: 0;
-                margin-top: 1rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人资源主页</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {--bg:#121212;--card:#1a1a1a;--nav:#181818;--text:#eaeaea;--gray:#999;--primary:#5578ff;--border:#333;--hover:#252525;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Microsoft YaHei,sans-serif;}
+body {background:var(--bg);color:var(--text);}
+.navbar {position:fixed;top:0;left:0;width:100%;height:60px;background:var(--nav);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:999;}
+.logo {font-size:18px;font-weight:bold;color:var(--primary);display:flex;align-items:center;gap:8px;}
+.nav-menu {display:flex;gap:6px;}
+.nav-item {padding:8px 14px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14px;}
+.nav-item:hover,.nav-item.active {background:var(--hover);}
+.login-btn {padding:6px 14px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;}
+.container {max-width:1200px;margin:100px auto 60px;padding:0 20px;}
+.hero {background:linear-gradient(90deg,#1a1a2e,#252954);border-radius:16px;padding:50px 32px;text-align:center;margin-bottom:30px;}
+.hero h1 {font-size:36px;margin-bottom:12px;color:#fff;}
+.hero p {font-size:16px;color:#ccc;max-width:600px;margin:0 auto;line-height:1.6;}
+.section-label {font-size:16px;color:var(--gray);margin:16px 0;display:flex;align-items:center;gap:8px;}
+.wrap {display:flex;flex-wrap:wrap;gap:20px;margin-bottom:30px;}
+.box {background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;flex:1;min-width:240px;}
+.wide {flex:2;}
+.box h3 {margin-bottom:10px;font-size:16px;}
+.box p {color:var(--gray);line-height:1.6;margin-bottom:14px;font-size:14px;}
+.btn {display:inline-block;padding:8px 14px;background:var(--primary);color:#fff;border-radius:6px;text-decoration:none;font-size:14px;}
+.links {display:flex;flex-wrap:wrap;gap:12px;margin-bottom:30px;}
+.link {background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;}
+.footer {background:var(--nav);border-top:1px solid var(--border);padding:30px 20px;text-align:center;color:var(--gray);}
+</style>
 </head>
 <body>
-    <!-- 左侧导航栏 -->
-    <div class="sidebar">
-        <div class="side-logo">
-            <div class="logo-icon"><i class="fas fa-rocket"></i></div>
-            <span>个人网站中心</span>
-        </div>
-        <div class="side-nav">
-            <a href="#" class="active"><i class="fas fa-home"></i> <span>首页主页</span></a>
-            <a href="#intro"><i class="fas fa-user"></i> <span>个人简介</span></a>
-            <a href="#contact"><i class="fab fa-qq"></i> <span>联系我们</span></a>
-            <a href="#account"><i class="fas fa-key"></i> <span>共享账号</span> <span class="badge">新</span></a>
-            <a href="#download"><i class="fas fa-download"></i> <span>资源下载</span></a>
-            <a href="#tools"><i class="fas fa-tools"></i> <span>实用工具</span></a>
-            <a href="#nav"><i class="fas fa-compass"></i> <span>快捷导航</span></a>
-            <a href="#notice"><i class="fas fa-bullhorn"></i> <span>公告须知</span></a>
-            <a href="#record"><i class="fas fa-history"></i> <span>更新记录</span></a>
-            <a href="#setting"><i class="fas fa-cog"></i> <span>网站设置</span></a>
-        </div>
+<div class="navbar">
+  <div class="logo"><i class="fas fa-star"></i> 个人资源主页</div>
+  <div class="nav-menu">
+    <a href="index.html" class="nav-item active">首页</a>
+    <a href="download.html" class="nav-item">资源下载</a>
+    <a href="tools.html" class="nav-item">实用工具</a>
+    <a href="docs.html" class="nav-item">个人文档</a>
+    <a href="user.html" class="nav-item">个人中心</a>
+  </div>
+  <div class="login-btn" onclick="location.href='user.html'">登录 / 注册</div>
+</div>
+<div class="container">
+  <div class="hero">
+    <h1>欢迎来到我的个人网站</h1>
+    <p>这里收集整理各类学习资料、实用工具、脚本模组、壁纸素材，全部免费开源，仅用于学习交流。</p>
+  </div>
+
+  <div class="section-label"><i class="fas fa-th"></i> 网站功能</div>
+  <div class="wrap">
+    <div class="box wide">
+      <h3>资源下载中心</h3>
+      <p>包含学习资料、办公工具、游戏模组、高清壁纸、脚本代码等内容。所有资源都经过测试，确保可用。链接失效可联系站长补发。</p>
+      <a href="download.html" class="btn">进入下载</a>
     </div>
-
-    <!-- 主内容区 -->
-    <div class="main-box">
-        <div class="top-bar">
-            <div class="time-text" id="showTime"></div>
-            <button class="theme-btn" id="themeSwitch">
-                <i class="fas fa-moon"></i>
-            </button>
-        </div>
-
-        <!-- 访问统计 -->
-        <div class="card visit-info">
-            <i class="fas fa-eye"></i> 本站累计访问量：<span id="visitCount">2689</span> 人次
-        </div>
-
-        <!-- 个人简介 -->
-        <div class="card" id="intro">
-            <h3 class="card-title"><i class="fas fa-user-circle"></i> 个人简介</h3>
-            <p>欢迎来到我的现代化个人网站！本站长期整理优质实用资源、编程源码、趣味工具、各类素材内容，资源持续稳定更新，无恶意弹窗，放心浏览取用。</p>
-            <p style="margin-top: 10px; color: var(--gray);">如有侵权请发送邮件至联系邮箱，我会第一时间删除相关内容。</p>
-        </div>
-
-        <!-- 联系方式 -->
-        <div class="card" id="contact">
-            <h3 class="card-title"><i class="fas fa-address-book"></i> 联系方式</h3>
-            <div class="contact-row">
-                <div class="qq-icon"><i class="fab fa-qq"></i></div>
-                <div>
-                    <h4>在线联络</h4>
-                    <p>QQ号码：3885710744</p>
-                    <p class="email-txt">联系邮箱：moongazing123123@qq.com</p>
-                </div>
-                <a href="tencent://message/?uin=3885710744&Site=qq&Menu=yes" class="chat-btn">立即私聊</a>
-            </div>
-        </div>
-
-        <!-- 多板块资源下载 -->
-        <div class="card" id="download">
-            <h3 class="card-title"><i class="fas fa-cloud-download-alt"></i> 全品类资源下载</h3>
-            <div class="download-grid">
-                <div class="down-item">
-                    <div>
-                        <span class="down-tag tag-primary">编程学习</span>
-                        <div class="down-name">C++大题型</div>
-                    </div>
-                    <a href="https://pan.quark.cn/s/7fb2abea2bdf?pwd=5Y7u" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div>
-                        <span class="down-tag tag-primary">办公工具</span>
-                        <div class="down-name">上班摸鱼神器</div>
-                    </div>
-                    <a href="https://pan.quark.cn/s/f0bce9ebf7f2?pwd=MfJq" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div>
-                        <span class="down-tag tag-primary">设计素材</span>
-                        <div class="down-name">豆包提供的壁纸素材</div>
-                    </div>
-                    <a href="https://pan.quark.cn/s/38887ea194b3?pwd=keiN" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item">
-                    <div>
-                        <span class="down-tag tag-primary">游戏辅助</span>
-                        <div class="down-name">我的世界辅助整合包</div>
-                    </div>
-                    <a href="https://pan.quark.cn/s/67b37b02e88d?pwd=EpMK" class="down-btn">立即下载</a>
-                </div>
-                <div class="down-item developing">
-                    <div>
-                        <span class="down-tag tag-warning">待开发</span>
-                        <div class="down-name">开发中</div>
-                    </div>
-                    <a href="#" class="down-btn disabled">暂未开放</a>
-                </div>
-                <div class="down-item developing">
-                    <div>
-                        <span class="down-tag tag-warning">待开发</span>
-                        <div class="down-name">开发中</div>
-                    </div>
-                    <a href="#" class="down-btn disabled">暂未开放</a>
-                </div>
-                <div class="down-item developing">
-                    <div>
-                        <span class="down-tag tag-warning">待开发</span>
-                        <div class="down-name">开发中</div>
-                    </div>
-                    <a href="#" class="down-btn disabled">暂未开放</a>
-                </div>
-                <div class="down-item developing">
-                    <div>
-                        <span class="down-tag tag-warning">待开发</span>
-                        <div class="down-name">开发中</div>
-                    </div>
-                    <a href="#" class="down-btn disabled">暂未开放</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- 实用工具 -->
-        <div class="card" id="tools">
-            <h3 class="card-title"><i class="fas fa-wrench"></i> 实用工具</h3>
-            <div class="tools-grid">
-                <a href="https://tool.lu/" target="_blank" class="tool-item">
-                    <i class="fas fa-code"></i>
-                    <div>在线代码格式化</div>
-                </a>
-                <a href="https://convertio.co/zh/" target="_blank" class="tool-item">
-                    <i class="fas fa-file-convert"></i>
-                    <div>文件格式转换</div>
-                </a>
-                <a href="https://www.bejson.com/" target="_blank" class="tool-item">
-                    <i class="fas fa-file-code"></i>
-                    <div>JSON格式化</div>
-                </a>
-                <a href="https://www.photopea.com/" target="_blank" class="tool-item">
-                    <i class="fas fa-edit"></i>
-                    <div>在线图片编辑</div>
-                </a>
-                <a href="https://www.urlencoder.org/" target="_blank" class="tool-item">
-                    <i class="fas fa-link"></i>
-                    <div>URL编解码</div>
-                </a>
-                <a href="https://tool.oschina.net/encrypt/" target="_blank" class="tool-item">
-                    <i class="fas fa-lock"></i>
-                    <div>加密解密工具</div>
-                </a>
-            </div>
-        </div>
-
-        <!-- 快捷导航 -->
-        <div class="card" id="nav">
-            <h3 class="card-title"><i class="fas fa-route"></i> 全网快捷导航</h3>
-            <div style="display:flex;flex-wrap:wrap;gap:10px;">
-                <a href="https://www.baidu.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">百度搜索</a>
-                <a href="https://pan.quark.cn" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">夸克网盘</a>
-                <a href="https://mail.qq.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">QQ邮箱</a>
-                <a href="https://www.bilibili.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">哔哩哔哩</a>
-                <a href="https://github.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">GitHub</a>
-                <a href="https://gitee.com" target="_blank" class="down-btn" style="width:auto;padding:8px 15px;">Gitee</a>
-            </div>
-        </div>
-
-        <!-- 公告须知 -->
-        <div class="card" id="notice">
-            <h3 class="card-title"><i class="fas fa-info-circle"></i> 网站公告</h3>
-            <p>1. 所有资源均免费分享，仅供学习交流使用<br>
-            2. 链接失效可联系我补发全新链接<br>
-            3. 有想要的资源可以留言提出，尽力更新<br>
-            4. 网站支持深色浅色一键自由切换<br>
-            5. 共享账号仅作测试使用，请勿用于商业用途<br>
-            6. 实用工具均为第三方链接，如有问题请反馈</p>
-        </div>
-
-        <!-- 更新记录 -->
-        <div class="card" id="record">
-            <h3 class="card-title"><i class="fas fa-history"></i> 更新记录</h3>
-            <ul style="line-height: 1.8; padding-left: 20px; color: var(--text);">
-                <li>2026-01-10：新增共享账号板块、实用工具板块</li>
-                <li>2026-01-05：优化深色模式显示效果，修复移动端适配问题</li>
-                <li>2026-01-01：网站首次上线，基础功能搭建完成</li>
-            </ul>
-        </div>
-
-        <!-- 网站设置 -->
-        <div class="card" id="setting">
-            <h3 class="card-title"><i class="fas fa-cog"></i> 网站设置</h3>
-            <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1rem;">
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" id="autoDark" checked>
-                    <label for="autoDark">跟随系统深色模式</label>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" id="showVisit" checked>
-                    <label for="showVisit">显示访问量统计</label>
-                </div>
-                <div style="display: flex; align-items: center; gap: 8px;">
-                    <input type="checkbox" id="rememberTheme" checked>
-                    <label for="rememberTheme">记住主题设置</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer">
-            ©2026 个人现代化网站 | 永久免费稳定运行
-        </div>
+    <div class="box">
+      <h3>实用小工具</h3>
+      <p>提供在线计算器、随机起名、画板、二维码、格式化、笑话、情话等工具，无需下载，即用即走。</p>
+      <a href="tools.html" class="btn">立即使用</a>
     </div>
+    <div class="box">
+      <h3>个人中心</h3>
+      <p>注册账号即可使用全站功能，支持长期保存状态，未来将开放收藏、留言、历史记录等更多功能。</p>
+      <a href="user.html" class="btn">登录 / 注册</a>
+    </div>
+    <div class="box wide">
+      <h3>网站说明文档</h3>
+      <p>包含使用规则、资源介绍、更新日志、联系方式与版权声明。建议新用户先阅读文档，避免使用问题。</p>
+      <a href="docs.html" class="btn">查看文档</a>
+    </div>
+  </div>
 
-    <script>
-        // 实时时钟
-        function setTime(){
-            let d=new Date();
-            let h=d.getHours(),m=d.getMinutes(),s=d.getSeconds();
-            h=h<10?"0"+h:h;
-            m=m<10?"0"+m:m;
-            s=s<10?"0"+s:s;
-            document.getElementById("showTime").innerText=`当前时间：${h}:${m}:${s}`;
-        }
-        setInterval(setTime,1000);
-        setTime();
+  <div class="section-label"><i class="fas fa-link"></i> 快捷入口</div>
+  <div class="links">
+    <a href="download.html" class="link"><i class="fas fa-download"></i> 资源库</a>
+    <a href="tools.html" class="link"><i class="fas fa-wrench"></i> 小工具</a>
+    <a href="docs.html" class="link"><i class="fas fa-file-alt"></i> 文档</a>
+    <a href="user.html" class="link"><i class="fas fa-user"></i> 我的中心</a>
+    <a href="#" class="link"><i class="fas fa-comment"></i> 留言</a>
+    <a href="#" class="link"><i class="fas fa-heart"></i> 收藏本站</a>
+  </div>
 
-        // 深浅色切换
-        const switchBtn=document.getElementById("themeSwitch");
-        const htmlDom=document.documentElement;
-        let localTheme=localStorage.getItem("webTheme")||"light";
-        htmlDom.setAttribute("data-theme",localTheme);
-        function changeIcon(t){
-            switchBtn.innerHTML=t==="dark"?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
-        }
-        changeIcon(localTheme);
-        switchBtn.addEventListener("click",()=>{
-            let now=htmlDom.getAttribute("data-theme")==="dark"?"light":"dark";
-            htmlDom.setAttribute("data-theme",now);
-            localStorage.setItem("webTheme",now);
-            changeIcon(now);
-        });
+  <div class="section-label"><i class="fas fa-bullhorn"></i> 近期公告</div>
+  <div class="box">
+    <h3>网站更新公告</h3>
+    <p>• 2026-05-23：全站页面重新排版，内容更丰富</p>
+    <p>• 2026-05-22：新增高清壁纸、MC模组、学习资料</p>
+    <p>• 2026-05-21：上线账号系统、深色模式、分页面导航</p>
+    <p>• 后续将持续扩充资源、工具、娱乐功能，保持永久免费</p>
+  </div>
 
-        // 复制文本功能
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert("复制成功！");
-            }).catch(() => {
-                // 降级方案
-                let textArea = document.createElement("textarea");
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand("copy");
-                document.body.removeChild(textArea);
-                alert("复制成功！");
-            });
-        }
-
-        // 访问量自增效果（模拟）
-        let visitCount = parseInt(document.getElementById("visitCount").innerText);
-        function updateVisitCount() {
-            visitCount += Math.floor(Math.random() * 3);
-            document.getElementById("visitCount").innerText = visitCount;
-            localStorage.setItem("visitCount", visitCount);
-        }
-        // 每30分钟更新一次访问量（模拟）
-        setInterval(updateVisitCount, 1800000);
-        
-        // 系统深色模式检测
-        const autoDark = document.getElementById("autoDark");
-        const darkModeMedia = window.matchMedia('(prefers-color-scheme: dark)');
-        function checkSystemTheme() {
-            if(autoDark.checked) {
-                const systemDark = darkModeMedia.matches;
-                const newTheme = systemDark ? "dark" : "light";
-                htmlDom.setAttribute("data-theme", newTheme);
-                localStorage.setItem("webTheme", newTheme);
-                changeIcon(newTheme);
-            }
-        }
-        autoDark.addEventListener("change", checkSystemTheme);
-        darkModeMedia.addEventListener("change", checkSystemTheme);
-        
-        // 显示/隐藏访问量
-        document.getElementById("showVisit").addEventListener("change", function(e) {
-            document.querySelector(".visit-info").style.display = e.target.checked ? "block" : "none";
-        });
-        
-        // 记住主题设置开关
-        document.getElementById("rememberTheme").addEventListener("change", function(e) {
-            if(!e.target.checked) {
-                localStorage.removeItem("webTheme");
-            } else {
-                localStorage.setItem("webTheme", htmlDom.getAttribute("data-theme"));
-            }
-        });
-    </script>
+  <div class="section-label"><i class="fas fa-user"></i> 关于站长</div>
+  <div class="box">
+    <h3>联系方式</h3>
+    <p>QQ：3885710744</p>
+    <p>邮箱：moongazing123123@qq.com</p>
+    <p>如果资源失效、需要补链、提建议，都可以通过以上方式联系。</p>
+    <p style="color:#fff;margin-top:10px;">本站所有内容仅供学习，禁止商用与非法传播</p>
+  </div>
+</div>
+<div class="footer">© 2026 个人资源主页 | 持续更新中</div>
 </body>
 </html>
