@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资源下载 - 个人主页</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {--bg:#121212;--card:#1a1a1a;--nav:#181818;--text:#eaeaea;--gray:#999;--primary:#5578ff;--border:#333;--hover:#252525;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Microsoft YaHei,sans-serif;}
+body {background:var(--bg);color:var(--text);}
+.navbar {position:fixed;top:0;left:0;width:100%;height:60px;background:var(--nav);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:999;}
+.logo {font-size:18px;font-weight:bold;color:var(--primary);display:flex;align-items:center;gap:8px;}
+.nav-menu {display:flex;gap:6px;}
+.nav-item {padding:8px 14px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14px;}
+.nav-item:hover,.nav-item.active {background:var(--hover);}
+.login-btn {padding:6px 14px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;}
+.container {max-width:1200px;margin:100px auto 60px;padding:0 20px;}
+.title {font-size:24px;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.group {margin-bottom:30px;}
+.group-label {color:var(--gray);margin-bottom:12px;font-size:15px;}
+.grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.item {background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:8px;}
+.item:hover {border-color:var(--primary);}
+.item-name {font-weight:500;}
+.item-info {font-size:12px;color:var(--gray);}
+.btn {width:100%;padding:9px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;}
+.dev {background:#444;cursor:not-allowed;color:#aaa;}
+.footer {background:var(--nav);border-top:1px solid var(--border);padding:30px 20px;text-align:center;color:var(--gray);}
+</style>
+</head>
+<body>
+<div class="navbar">
+  <div class="logo"><i class="fas fa-star"></i> 个人资源主页</div>
+  <div class="nav-menu">
+    <a href="index.html" class="nav-item">首页</a>
+    <a href="download.html" class="nav-item active">资源下载</a>
+    <a href="tools.html" class="nav-item">实用工具</a>
+    <a href="docs.html" class="nav-item">个人文档</a>
+    <a href="user.html" class="nav-item">个人中心</a>
+  </div>
+  <div class="login-btn" onclick="location.href='user.html'">登录</div>
+</div>
+<div class="container">
+  <h1 class="title"><i class="fas fa-download"></i> 资源下载中心</h1>
+
+  <div class="group">
+    <div class="group-label">📁 学习资料</div>
+    <div class="grid">
+      <div class="item">
+        <div class="item-name">C++学习资料</div>
+        <div class="item-info">题库 / 笔记 / 教程</div>
+        <button class="btn" onclick="window.open('https://pan.quark.cn/s/7fb2abea2bdf')">下载</button>
+      </div>
+      <div class="item">
+        <div class="item-name">编程入门教程</div>
+        <div class="item-info">基础 / 案例 / 练习</div>
+        <button class="btn">下载</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">🛠️ 实用工具</div>
+    <div class="grid">
+      <div class="item">
+        <div class="item-name">上班摸鱼神器</div>
+        <div class="item-info">桌面小工具 / 无广告</div>
+        <button class="btn" onclick="window.open('https://pan.quark.cn/s/f0bce9ebf7f2')">下载</button>
+      </div>
+      <div class="item">
+        <div class="item-name">系统优化工具</div>
+        <div class="item-info">清理 / 加速 / 修复</div>
+        <button class="btn">下载</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">🖼️ 壁纸素材</div>
+    <div class="grid">
+      <div class="item">
+        <div class="item-name">高清壁纸合集</div>
+        <div class="item-info">4K / 无水印 / 多风格</div>
+        <button class="btn" onclick="window.open('https://pan.quark.cn/s/38887ea194b3')">下载</button>
+      </div>
+      <div class="item">
+        <div class="item-name">设计素材包</div>
+        <div class="item-info">图标 / 背景 / 模板</div>
+        <button class="btn">下载</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+      <div class="item">
+        <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">🎮 游戏相关</div>
+    <div class="grid">
+      <div class="item">
+        <div class="item-name">MC辅助整合包</div>
+        <div class="item-info">优化 / 模组 / 兼容</div>
+        <button class="btn" onclick="window.open('https://pan.quark.cn/s/67b37b02e88d')">下载</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+      <div class="item">
+        <div class="item-name">开发中</div>
+        <div class="item-info">即将上线</div>
+        <button class="btn dev">开发中</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="footer">© 2026 个人资源主页 | 资源仅供学习</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人文档 - 个人资源主页</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {--bg:#121212;--card:#1a1a1a;--nav:#181818;--text:#eaeaea;--gray:#999;--primary:#5578ff;--border:#333;--hover:#252525;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Microsoft YaHei,sans-serif;}
+body {background:var(--bg);color:var(--text);}
+.navbar {position:fixed;top:0;left:0;width:100%;height:60px;background:var(--nav);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:999;}
+.logo {font-size:18px;font-weight:bold;color:var(--primary);display:flex;align-items:center;gap:8px;}
+.nav-menu {display:flex;gap:6px;}
+.nav-item {padding:8px 14px;border-radius:6px;color:var(--text);text-decoration:none;font-size:14px;}
+.nav-item:hover,.nav-item.active {background:var(--hover);}
+.login-btn {padding:6px 14px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;}
+.container {max-width:1200px;margin:100px auto 60px;padding:0 20px;}
+.page-title {font-size:24px;margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+.card {background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:20px;line-height:1.7;}
+.card h3 {margin-bottom:12px;color:#fff;}
+.footer {background:var(--nav);border-top:1px solid var(--border);padding:30px 20px;text-align:center;color:var(--gray);}
+</style>
+</head>
+<body>
+<div class="navbar">
+  <div class="logo"><i class="fas fa-star"></i> 个人资源主页</div>
+  <div class="nav-menu">
+    <a href="index.html" class="nav-item">首页</a>
+    <a href="download.html" class="nav-item">资源下载</a>
+    <a href="tools.html" class="nav-item">实用工具</a>
+    <a href="docs.html" class="nav-item active">个人文档</a>
+    <a href="user.html" class="nav-item">个人中心</a>
+  </div>
+  <div class="login-btn" onclick="location.href='user.html'">登录</div>
+</div>
+
+<div class="container">
+  <h1 class="page-title"><i class="fas fa-file-alt"></i> 网站文档中心</h1>
+
+  <div class="card">
+    <h3>网站介绍</h3>
+    <p>这是一个个人资源分享网站，主要提供学习资料、实用工具、壁纸素材、游戏模组、小脚本等内容。</p>
+    <p>网站完全免费、无广告、无捆绑、无收费套路，所有资源仅供学习交流使用。</p>
+    <p>如果你觉得本站有用，可以收藏或推荐给朋友，你的支持就是更新动力。</p>
+  </div>
+
+  <div class="card">
+    <h3>使用规则</h3>
+    <p>1. 本站所有资源仅限个人学习，禁止商用、倒卖、传播等行为。</p>
+    <p>2. 下载的文件请于24小时内删除，如侵犯权益请联系站长删除。</p>
+    <p>3. 不得利用本站工具与资源从事违法违规行为。</p>
+    <p>4. 本站不收集任何隐私信息，账号仅保存在本地浏览器。</p>
+  </div>
+
+  <div class="card">
+    <h3>下载说明</h3>
+    <p>• 推荐资源：已测试可正常使用，点击直接跳转网盘。</p>
+    <p>• 开发中：功能尚未完成，会在后续版本陆续上线。</p>
+    <p>• 链接失效：可直接联系站长补发。</p>
+    <p>• 格式支持：大部分为压缩包，需要解压软件打开。</p>
+  </div>
+
+  <div class="card">
+    <h3>账号系统说明</h3>
+    <p>• 账号仅储存在本地浏览器，不会上传到服务器。</p>
+    <p>• 登录后可使用全站功能，未来会增加收藏、留言等功能。</p>
+    <p>• 清除浏览器数据会导致账号信息丢失，请记住自己的用户名与密码。</p>
+    <p>• 目前为简易版账号系统，不支持找回密码，请妥善保管。</p>
+  </div>
+
+  <div class="card">
+    <h3>更新日志</h3>
+    <p>2026-05-23：全站重新排版，内容扩充，错落布局优化</p>
+    <p>2026-05-22：新增资源下载、工具页面、账号系统</p>
+    <p>2026-05-21：网站搭建完成，深色模式、分页面上线</p>
+    <p>2026-05-20：项目启动，规划结构与风格设计</p>
+  </div>
+
+  <div class="card">
+    <h3>联系方式</h3>
+    <p>QQ：3885710744</p>
+    <p>邮箱：moongazing123123@qq.com</p>
+    <p>如需补链、建议功能、反馈问题，都可以联系我。</p>
+  </div>
+</div>
+
+<div class="footer">© 2026 个人资源主页</div>
+</body>
+</html>
