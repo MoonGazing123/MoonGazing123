@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>个人中心 - 望月论坛</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {--bg:#181818;--card:#222;--nav:#1e1e1e;--text:#eaeaea;--gray:#999;--primary:#6a85ff;--border:#333;--hover:#2a2a2a;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI","Microsoft YaHei",sans-serif;}
+body {background:var(--bg);color:var(--text);display:flex;}
+.sidebar {width:220px;background:var(--nav);height:100vh;position:fixed;padding:20px 0;border-right:1px solid var(--border);}
+.logo {font-size:24px;font-weight:bold;color:var(--primary);padding:0 20px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.nav-list {margin-top:20px;}
+.nav-item {display:flex;align-items:center;gap:12px;padding:12px 20px;color:var(--text);text-decoration:none;font-size:15px;transition:all 0.2s ease;}
+.nav-item:hover,.nav-item.active {background:var(--hover);color:var(--primary);}
+.main {margin-left:220px;width:100%;padding:30px;display:flex;align-items:center;justify-content:center;min-height:80vh;}
+.box {background:var(--card);border:1px solid var(--border);border-radius:12px;padding:30px;width:100%;max-width:460px;}
+.title {font-size:22px;margin-bottom:20px;text-align:center;}
+input {width:100%;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--text);margin-bottom:14px;outline:none;}
+.btn {width:100%;padding:12px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;margin-bottom:10px;}
+.btn2 {background:#444;}
+.info {text-align:center;color:var(--gray);margin-top:10px;line-height:1.6;}
+.footer {text-align:center;color:var(--gray);font-size:14px;padding:20px;}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo"><i class="fas fa-moon"></i> 望月论坛</div>
+  <div class="nav-list">
+    <a href="index.html" class="nav-item"><i class="fas fa-home"></i> 首页</a>
+    <a href="mc.html" class="nav-item"><i class="fas fa-cube"></i> MC论坛区</a>
+    <a href="dlrs.html" class="nav-item"><i class="fas fa-music"></i> DLRS论坛区</a>
+    <a href="download.html" class="nav-item"><i class="fas fa-download"></i> 资源下载</a>
+    <a href="docs.html" class="nav-item"><i class="fas fa-file-alt"></i> 文档中心</a>
+    <a href="user.html" class="nav-item active"><i class="fas fa-user"></i> 个人中心</a>
+  </div>
+</div>
+
+<div class="main">
+  <div class="box" id="box">
+    <div class="title">用户登录</div>
+    <input type="text" id="user" placeholder="用户名">
+    <input type="password" id="pwd" placeholder="密码">
+    <button class="btn" onclick="login()">登录</button>
+    <button class="btn btn2" onclick="reg()">注册</button>
+    <div class="info">信息仅保存在本地<br>清除缓存会丢失</div>
+  </div>
+</div>
+
+<div class="footer">© 2026 望月论坛</div>
+
+<script>
+function $(id){return document.getElementById(id)}
+function login(){
+  let u = $('user').value;
+  let p = $('pwd').value;
+  if(localStorage.getItem('user')===u&&localStorage.getItem('pwd')===p){
+    localStorage.setItem('login','1');
+    alert('登录成功！');
+    location.reload();
+  }else{alert('账号或密码错误');}
+}
+function reg(){
+  let u = $('user').value;
+  let p = $('pwd').value;
+  if(u&&p){localStorage.setItem('user',u);localStorage.setItem('pwd',p);alert('注册成功！请登录');}
+  else{alert('请输入完整信息');}
+}
+window.onload=function(){
+  if(localStorage.getItem('login')==='1'){
+    $('box').innerHTML=`
+      <div class="title">欢迎回来</div>
+      <p style="text-align:center;margin-bottom:20px;">用户：${localStorage.getItem('user')}</p>
+      <button class="btn" onclick="logout()">退出登录</button>
+    `;
+  }
+}
+function logout(){localStorage.removeItem('login');alert('已退出');location.reload();}
+</script>
+</body>
+</html>

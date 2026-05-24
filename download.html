@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>资源下载 - 望月论坛</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {--bg:#181818;--card:#222;--nav:#1e1e1e;--text:#eaeaea;--gray:#999;--primary:#6a85ff;--border:#333;--hover:#2a2a2a;}
+* {margin:0;padding:0;box-sizing:border-box;font-family:"Segoe UI","Microsoft YaHei",sans-serif;}
+body {background:var(--bg);color:var(--text);display:flex;}
+.sidebar {width:220px;background:var(--nav);height:100vh;position:fixed;padding:20px 0;border-right:1px solid var(--border);}
+.logo {font-size:24px;font-weight:bold;color:var(--primary);padding:0 20px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.nav-list {margin-top:20px;}
+.nav-item {display:flex;align-items:center;gap:12px;padding:12px 20px;color:var(--text);text-decoration:none;font-size:15px;transition:all 0.2s ease;}
+.nav-item:hover,.nav-item.active {background:var(--hover);color:var(--primary);}
+.main {margin-left:220px;width:100%;padding:30px;}
+.section-title {font-size:18px;margin-bottom:20px;}
+.grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;}
+.card {background:var(--card);border-radius:10px;padding:20px;border:1px solid var(--border);transition:0.3s;}
+.card:hover {transform:translateY(-3px);border-color:var(--primary);}
+.card-title {font-size:16px;margin-bottom:8px;}
+.card-desc {font-size:13px;color:var(--gray);margin-bottom:12px;}
+.down-btn {width:100%;padding:10px;background:var(--primary);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:0.3s;}
+.down-btn:hover {background:#4f6de0;}
+.rent-btn {background:#444;cursor:default;}
+.footer {margin-top:40px;text-align:center;color:var(--gray);font-size:14px;}
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="logo"><i class="fas fa-moon"></i> 望月论坛</div>
+  <div class="nav-list">
+    <a href="index.html" class="nav-item"><i class="fas fa-home"></i> 首页</a>
+    <a href="mc.html" class="nav-item"><i class="fas fa-cube"></i> MC论坛区</a>
+    <a href="dlrs.html" class="nav-item"><i class="fas fa-music"></i> DLRS论坛区</a>
+    <a href="download.html" class="nav-item active"><i class="fas fa-download"></i> 资源下载</a>
+    <a href="docs.html" class="nav-item"><i class="fas fa-file-alt"></i> 文档中心</a>
+    <a href="user.html" class="nav-item"><i class="fas fa-user"></i> 个人中心</a>
+  </div>
+</div>
+
+<div class="main">
+  <div class="section-title">📁 资源下载中心</div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-title">C++学习资料</div>
+      <div class="card-desc">题库 / 笔记 / 教程</div>
+      <button class="down-btn" onclick="window.open('https://pan.quark.cn/s/6014dde3532c?pwd=WQCS')">下载（夸克）</button>
+    </div>
+    <div class="card">
+      <div class="card-title">上班摸鱼神器</div>
+      <div class="card-desc">桌面小工具 / 无广告</div>
+      <button class="down-btn" onclick="window.open('https://pan.quark.cn/s/38213dd0c967?pwd=A9Z6')">下载（夸克）</button>
+    </div>
+    <div class="card">
+      <div class="card-title">高清壁纸合集</div>
+      <div class="card-desc">4K / 无水印 / 多风格</div>
+      <button class="down-btn" onclick="window.open('https://pan.quark.cn/s/792bf5a9bce4?pwd=aQNr')">下载（夸克）</button>
+    </div>
+    <div class="card">
+      <div class="card-title">MC辅助整合包</div>
+      <div class="card-desc">优化 / 模组 / 兼容</div>
+      <button class="down-btn" onclick="window.open('https://pan.quark.cn/s/212c8b78c16c?pwd=ntXA')">下载（夸克）</button>
+    </div>
+    <div class="card">
+      <div class="card-title">下载位招租</div>
+      <div class="card-desc">免费挂台，联系站长添加</div>
+      <button class="down-btn rent-btn">招租中</button>
+    </div>
+    <div class="card">
+      <div class="card-title">下载位招租</div>
+      <div class="card-desc">免费挂台，联系站长添加</div>
+      <button class="down-btn rent-btn">招租中</button>
+    </div>
+  </div>
+  <div class="footer">© 2026 望月论坛 | 资源仅供学习交流</div>
+</div>
+</body>
+</html>
