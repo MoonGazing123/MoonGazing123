@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>MC社区 - 望月论坛</title>
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei",sans-serif;}
+:root{
+    --bg:#121212;
+    --nav:#1a1a1a;
+    --card:#1e1e1e;
+    --border:#333;
+    --text:#f0f0f0;
+    --gray:#999;
+    --main:#74cc7a;
+}
+body{background:var(--bg);color:var(--text);}
+.nav{background:var(--nav);border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:0;z-index:99;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+.nav-inner{display:flex;justify-content:space-between;align-items:center;}
+.logo{font-size:22px;font-weight:bold;color:var(--main);display:flex;align-items:center;gap:8px;}
+.menu{display:flex;gap:24px;}
+.menu a{color:var(--text);text-decoration:none;font-size:15px;transition:0.2s;}
+.menu a:hover{color:var(--main);}
+.post-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:30px;}
+.post-title{font-size:18px;margin-bottom:14px;color:var(--main);}
+input,textarea{width:100%;padding:12px;background:#161616;border:1px solid var(--border);border-radius:6px;color:#fff;margin-bottom:10px;outline:none;font-size:14px;}
+textarea{min-height:100px;resize:vertical;}
+.post-btn{padding:10px 20px;background:var(--main);color:#fff;border:none;border-radius:6px;cursor:pointer;transition:0.2s;}
+.post-btn:hover{background:#5fb865;}
+.list{margin-top:30px;}
+.item{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:20px;margin-bottom:12px;}
+.item h3{font-size:16px;margin-bottom:6px;color:var(--main);}
+.item p{color:#ccc;font-size:14px;line-height:1.5;}
+.info{font-size:12px;color:var(--gray);margin-top:8px;}
+.footer{background:var(--nav);border-top:1px solid var(--border);padding:25px 0;text-align:center;color:var(--gray);font-size:14px;margin-top:50px;}
+</style>
+</head>
+<body>
+<div class="nav">
+    <div class="container nav-inner">
+        <div class="logo"><i class="fas fa-cube"></i> 望月论坛</div>
+        <div class="menu">
+            <a href="index.html">首页</a>
+            <a href="mc.html" style="color:var(--main)">MC社区</a>
+            <a href="dlrs.html">DLRS社区</a>
+            <a href="download.html">资源下载</a>
+            <a href="docs.html">帮助说明</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="post-box">
+        <div class="post-title">发布MC帖子</div>
+        <input type="text" id="title" placeholder="输入帖子标题">
+        <textarea id="content" placeholder="输入帖子内容"></textarea>
+        <button class="post-btn" onclick="sendPost()">立即发布</button>
+    </div>
+    <div class="list" id="list"></div>
+</div>
+
+<div class="footer">© 2026 望月论坛 | 原创无抄袭社区系统</div>
+
+<script>
+function loadPosts(){
+    let list=document.getElementById("list");
+    let data=JSON.parse(localStorage.getItem("mc_posts")||"[]");
+    list.innerHTML="";
+    data.forEach(item=>{
+        let div=document.createElement("div");
+        div.className="item";
+        div.innerHTML=`
+            <h3>${item.title}</h3>
+            <p>${item.content}</p>
+            <div class="info">${item.time}</div>
+        `;
+        list.appendChild(div);
+    })
+}
+function sendPost(){
+    let title=document.getElementById("title").value.trim();
+    let content=document.getElementById("content").value.trim();
+    if(!title||!content){
+        alert("标题和内容不能为空");
+        return;
+    }
+    let time=new Date().toLocaleString();
+    let data=JSON.parse(localStorage.getItem("mc_posts")||"[]");
+    data.unshift({title,content,time});
+    localStorage.setItem("mc_posts",JSON.stringify(data));
+    document.getElementById("title").value="";
+    document.getElementById("content").value="";
+    loadPosts();
+}
+window.onload=loadPosts;
+</script>
+</body>
+</html>
